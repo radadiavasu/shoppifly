@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-2 col-sm-12 col-md-12">
+            <div class="list-group">
+                <a href="{% url 'laptop' %}" class="list-group-item list-group-item-action" aria-current="true">All
+                    Laptops</a>
+                <a href="{% url 'laptopdata' 'HP' %}" class="list-group-item list-group-item-action"
+                    aria-current="true">HP</a>
+                <a href="{% url 'laptopdata' 'Dell' %}" class="list-group-item list-group-item-action"
+                    aria-current="true">Dell</a>
+                <a href="{% url 'laptopdata' 'Acer' %}" class="list-group-item list-group-item-action"
+                    aria-current="true">Acer</a>
+                <a href="{% url 'laptopdata' 'below' %}" class="list-group-item list-group-item-action"
+                    aria-current="true">Below $ 728</a>
+                <a href="{% url 'laptopdata' 'above' %}" class="list-group-item list-group-item-action"
+                    aria-current="true">Above $ 728</a>
+            </div>
+        </div>
+        <div class="col-lg-10 ">
+            <div class="row">
+                {% for item in laptops %}
+                <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-4">
+                    <a href="{% url 'product_detail' item.id %}" class="btn p-lg-5">
+                        <div class="item">
+                            <img src="{{item.product_image.url}}" class="sort_image" alt="mobile-image">
+                            <div class="fw-bold">{{item.title}}</div>
+                            <div class="fw-bold mb-3">$ {{item.discounted_price}}</div>
+                    <small class="fw-light text-decoration-line-through mb-3">$ {{item.selling_price}}</small>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

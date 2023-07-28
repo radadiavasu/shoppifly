@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+
+    <div class="row">
+        {% for item in shoes %}
+        </select>
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-4">
+            <a href="{% url 'product_detail' item.id %}" class="btn p-lg-5">
+                <div class="item">
+                    <img src="{{item.product_image.url}}" class="fashion_image mb-3" alt="shoes-image">
+                    <div class="fw-bold mb-3">{{item.title}}</div>
+                    <div class="fw-bold mb-3">$ {{item.discounted_price}}</div>
+                    <small class="fw-light text-decoration-line-through mb-3">$ {{item.selling_price}}</small>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,33 @@
+{% comment %} <!-- submit_rating.html -->
+<h1>Submit Rating</h1>
+
+<form method="POST" action="{% url 'submit_rating' product_id %}">
+  {% csrf_token %}
+  <div class="star-rating">
+    {% for rating in RATING_CHOICES %}
+      <input id="star{{ rating.0 }}" type="radio" name="rating" value="{{ rating.0 }}">
+      <label for="star{{ rating.0 }}" title="{{ rating.1 }}">{{ rating.1 }}</label>
+    {% endfor %}
+  </div>
+  <button type="submit">Submit Rating</button>
+</form> {% endcomment %}
+
+
+<h1>Submit Rating</h1>
+
+<form method="POST" action="{% url 'submit_rating' product_id %}">
+  {% csrf_token %}
+  <div class="star-rating">
+    <input id="star5" type="radio" name="rating" value="5">
+    <label for="star5" title="5 stars">★</label>
+    <input id="star4" type="radio" name="rating" value="4">
+    <label for="star4" title="4 stars">★</label>
+    <input id="star3" type="radio" name="rating" value="3">
+    <label for="star3" title="3 stars">★</label>
+    <input id="star2" type="radio" name="rating" value="2">
+    <label for="star2" title="2 stars">★</label>
+    <input id="star1" type="radio" name="rating" value="1">
+    <label for="star1" title="1 star">★</label>
+  </div>
+  <button type="submit">Submit Rating</button>
+</form>

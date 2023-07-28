@@ -1,0 +1,220 @@
+
+.owl-carousel .item{
+ /* border: 1px solid black; */
+ font-size: 24px;
+ text-align: center;
+ margin-top: 20px;;
+}
+
+.owl-next{
+ float:right;
+}
+.owl-prev{
+ float:left;
+}
+.owl-prev span{
+ font-size: 24px;
+ font-weight: bold;
+}
+.owl-next span{
+ font-size: 24px;
+ font-weight: bold;
+}
+
+.owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+    display: block;
+}
+
+.myimage{
+    min-height: 40rem;
+    max-height: 40rem;
+    min-width:  30rem;
+    max-width:  30rem;
+}
+
+.cart_myimage{
+    min-height: 15rem;
+    max-height: 15rem;
+    min-width:  13rem;
+    max-width:  13rem;
+}
+
+.orders_image{
+    min-height: 12rem;
+    max-height: 12rem;
+    min-width:  10rem;
+    max-width:  10rem;
+}
+
+.sort_image{
+    min-height: 20rem;
+    max-height: 20rem;
+    min-width:  18rem;
+    max-width:  18rem;
+}
+
+.fashion_image{
+    min-height: 30rem;
+    max-height: 30rem;
+    min-width:  25rem;
+    max-width:  25rem;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#footer{
+    margin-top: auto;
+}
+
+.banner{
+    min-height: 40rem;
+    max-height: 40rem;
+}
+
+.rating {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    gap: 0.3rem;
+    --stroke: #666;
+    --fill: #ffc73a;
+}
+
+.rating input {
+    -webkit-appearance: unset;
+    -moz-appearance: unset;
+    appearance: unset;
+}
+
+.rating label {
+    cursor: pointer;
+}
+
+.rating svg {
+    width: 3rem;
+    height: 3rem;
+    overflow: visible;
+    fill: transparent;
+    stroke: var(--stroke);
+    stroke-linejoin: bevel;
+    stroke-dasharray: 12;
+    -webkit-animation: idle 4s linear infinite;
+    animation: idle 4s linear infinite;
+    -webkit-transition: stroke 0.2s, fill 0.5s;
+    transition: stroke 0.2s, fill 0.5s;
+}
+
+@-webkit-keyframes idle {
+    from {
+        stroke-dashoffset: 24;
+    }
+}
+
+@keyframes idle {
+    from {
+        stroke-dashoffset: 24;
+    }
+}
+
+.rating label:hover svg {
+    stroke: var(--fill);
+}
+
+.rating input:checked~label svg {
+    -webkit-transition: 0s;
+    transition: 0s;
+    -webkit-animation: idle 4s linear infinite, yippee 0.75s backwards;
+    animation: idle 4s linear infinite, yippee 0.75s backwards;
+    fill: var(--fill);
+    stroke: var(--fill);
+    stroke-opacity: 0;
+    stroke-dasharray: 0;
+    stroke-linejoin: miter;
+    stroke-width: 8px;
+}
+
+@-webkit-keyframes yippee {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        fill: var(--fill);
+        fill-opacity: 0;
+        stroke-opacity: 1;
+        stroke: var(--stroke);
+        stroke-dasharray: 10;
+        stroke-width: 1px;
+        stroke-linejoin: bevel;
+    }
+
+    30% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        fill: var(--fill);
+        fill-opacity: 0;
+        stroke-opacity: 1;
+        stroke: var(--stroke);
+        stroke-dasharray: 10;
+        stroke-width: 1px;
+        stroke-linejoin: bevel;
+    }
+
+    30.1% {
+        stroke: var(--fill);
+        stroke-dasharray: 0;
+        stroke-linejoin: miter;
+        stroke-width: 8px;
+    }
+
+    60% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        fill: var(--fill);
+    }
+}
+
+@keyframes yippee {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        fill: var(--fill);
+        fill-opacity: 0;
+        stroke-opacity: 1;
+        stroke: var(--stroke);
+        stroke-dasharray: 10;
+        stroke-width: 1px;
+        stroke-linejoin: bevel;
+    }
+
+    30% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        fill: var(--fill);
+        fill-opacity: 0;
+        stroke-opacity: 1;
+        stroke: var(--stroke);
+        stroke-dasharray: 10;
+        stroke-width: 1px;
+        stroke-linejoin: bevel;
+    }
+
+    30.1% {
+        stroke: var(--fill);
+        stroke-dasharray: 0;
+        stroke-linejoin: miter;
+        stroke-width: 8px;
+    }
+
+    60% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        fill: var(--fill);
+    }
+}

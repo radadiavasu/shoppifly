@@ -1,0 +1,51 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Addresses{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-2 border-end">
+            <h3>Welcome {{request.user}}</h3>
+            <ul class="list-unstyled">
+                <li class="d-grid my-2"><a href="{% url 'profile' %}" class="btn btn-primary ">Profile</a></li>
+                <li class="d-grid my-2"><a href="{% url 'address' %}" class="btn btn-primary">Address</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9 offset-sm-1">
+            <div class="row">
+                {% if messages %}
+                {% for msg in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{msg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if customers %}
+                {% for customer in customers %}
+                <div class="col-sm-6 my-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Address {{forloop.counter}}</h3>
+                            <p>Name: {{customer.name}}</p>
+                            <p>Address 1: {{customer.locality}}</p>
+                            <p>Address 2: {{customer.city}}</p>
+                            <p>State: {{customer.state}}</p>
+                            <p>Zipcode: {{customer.zipcode}}</p>
+
+                            <a href="{% url 'edit_address' customer.id %}" class="btn btn-dark">Edit Address </a>
+                            <a href="{% url 'delete_address' customer.id %}" class="btn btn-danger">Delete Address </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h3>Add address from Profile</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

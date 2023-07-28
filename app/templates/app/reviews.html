@@ -1,0 +1,18 @@
+<!-- reviews.html -->
+<h1>Product Reviews</h1>
+
+{% if reviews %}
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <h2>{{ review.product.name }}</h2>
+        <p>Rating: {{ review.rating }} - {{ review.get_stars }}</p>
+        <p>Review: {{ review.review_text }}</p>
+        <p>By: {{ review.user }}</p>
+        <p>Timestamp: {{ review.timestamp }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No reviews available.</p>
+{% endif %}

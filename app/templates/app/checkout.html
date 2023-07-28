@@ -1,0 +1,188 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-6">
+      <h4>Order Summary</h4>
+      <hr>
+
+      {% if cart_items %}
+      {% for item in cart_items %}
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5>Product: {{item.product.title}}</h5>
+          <p>Quantity: {{item.quantity}}</p>
+          <p class="fw-bold">Price: $. {{item.total_cost}}</p>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <a href="/" class="btn btn-primary my-3">Add Items</a>
+      {% endif %}
+
+      <div class="card">
+        <div class="card-body">
+          <h3>Total Amount</h3>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center border-1 p-2">
+              Amount<span>$ <span id="amount"> {{amount}}</span></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-1 p-2">
+              Shipping Charges<span>$.
+                {{shipping_amount}}</span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-2 p-2 mb-3">
+              <div>
+                <strong>Total</strong> <small>(including GST)</small>
+              </div>
+              <span><strong>$. <strong id="total_amount"> {{total_amount}}</strong></strong></span>
+            </li>
+          </ul>
+          {% if carts %}
+          <div class="d-grid"><a href="{% url 'checkout' %}" class="btn btn-primary">Place Order</a></div>
+          {% else %}
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-4 offset-sm-1">
+      <h4>Select Shipping Address</h4>
+      <hr>
+
+      {% if addresses %}
+      <form action="/orderdone">
+        {% for address in addresses %}
+        <div class="card">
+          <div class="card-body">
+            <h5>{{address.name}}</h5>
+            <p> {{address.locality}},{{address.city}},{{address.state}}-{{address.zipcode}}</p>
+          </div>
+        </div>
+        <div class="form-check mt-2 mb-5">
+          <input required class="form-check-input" type="radio" value="{{address.id}}" id="custadd{{forloop.counter}}"
+            name="custid">
+          <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+            Address: {{forloop.counter}} </label>
+        </div>
+        {% endfor %}
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+        <div id="paypal-button-container"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=ASruT0R_X6kGCLBAY8zgkwkCJkKQTVrnZDtd_KeFNSL4RrATR8ngannaEmLntqKZERQxrPKzcEhN2VfG&currency=USD"></script>
+        <script>
+        
+            // Render the PayPal button
+        
+            paypal.Button.render({
+        
+                // Set your environment
+        
+                env: 'sandbox', // sandbox | production
+        
+                // Specify the style of the button
+        
+                style: {
+                    layout: 'vertical',  // horizontal | vertical
+                    size:   'responsive',    // medium | large | responsive
+                    shape:  'pill',      // pill | rect
+                    color:  'gold'       // gold | blue | silver | black
+                },
+        
+                // Specify allowed and disallowed funding sources
+                //
+                // Options:
+                // - paypal.FUNDING.CARD
+                // - paypal.FUNDING.CREDIT
+                // - paypal.FUNDING.ELV
+        
+                funding: {
+                    allowed: [ paypal.FUNDING.CARD, paypal.FUNDING.CREDIT ],
+                    disallowed: [ ]
+                },
+        
+                // PayPal Client IDs - replace with your own
+                // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+        
+                client: {
+                    sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+                    production: '<ASruT0R_X6kGCLBAY8zgkwkCJkKQTVrnZDtd_KeFNSL4RrATR8ngannaEmLntqKZERQxrPKzcEhN2VfG>'
+                },
+        
+                payment: function(data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {
+                                    amount: { total: '{{total_amount}}', currency: 'USD' }
+                                }
+                            ]
+                        }
+                    });
+                },
+        
+                onAuthorize: function(data, actions) {
+                  return actions.payment.execute().then(function() {
+                      // Payment completed, remove the disabled attribute
+                      document.getElementById("submit-btn").removeAttribute("disabled");
+                      window.alert('Payment Completed!');
+                  });
+              }
+        
+              }, '#paypal-button-container');
+        
+        </script>
+        {% if cart_items %}
+        <div class="text-end">
+          <button type="submit" id="submit-btn" class="button button1" disabled>Continue</button>
+          <style>
+            .button {
+              background-color: #4CAF50; /* Green */
+              border: none;
+              color: white;
+              padding: 16px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              transition-duration: 0.4s;
+              cursor: pointer;
+              width: 400px;
+              opacity: 0.6;
+              cursor: not-allowed;
+            }
+            
+            .button1 {
+              background-color: white; 
+              color: black; 
+              border: 2px solid #4CAF50;
+              box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+            .button1:hover {
+              background-color: #4CAF50;
+              color: white;
+              box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+          </style>
+        </div>
+        {% endif %}
+
+      </form>
+      {% else %}
+      <h3 class="text-danger">Add address to order</h3>
+      <a href="/profile" class="btn btn-primary">Add address</a>
+      {% endif %}
+      <br>
+      <body>
+        
+      </body>
+    </div>
+  </div>
+  <strong class="">Please read these conditions carefully before using the shoppifly.com website. By
+    using
+    the
+    shoppifly.com
+    website, you signify your agreement to be bound by these conditions.</strong>
+</div>
+{% endblock main-content %}

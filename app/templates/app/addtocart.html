@@ -1,0 +1,106 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <h1 class="text-center mb-5">Shopping Cart</h1>
+
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h3>Cart</h3>
+          <hr>
+
+          {% if carts %}
+          {% for cart in carts %}
+
+          <div class="row" id="main_cart">
+            <div class="col-sm-4 text-center align-self-cente p-3">
+              <img src="{{cart.product.product_image.url}}" alt="product_image" srcset=""
+                class="img-fluid img-thumbnail shadow-sm cart_myimage">
+            </div>
+            <div class="col-sm-8 p-3">
+              <h5 class="mb-2 pt-2">{{cart.product.title}}</h5>
+              <p class="text-muted small mb-2 pt-2">{{cart.product.description}}</p>
+              <div id="selected-size"></div>
+
+              <script>
+                const selectedSize = getCookie('selectedSize');
+                if (selectedSize) {
+                  const selectedSizeDiv = document.getElementById('selected-size');
+                  selectedSizeDiv.textContent = `Selected size: ${selectedSize}`;
+                }
+              
+                function getCookie(name) {
+                  const value = `; ${document.cookie}`;
+                  const parts = value.split(`; ${name}=`);
+                  if (parts.length === 2) {
+                    return parts.pop().split(';').shift();
+                  }
+                }
+              </script>              
+              <div class="mb-2 pt-2">
+                <label for="quantity">Quantity:</label>
+                <a class="minus-cart btn" pid={{cart.product.id}}><i class="fas fa-minus-square fa-lg"></i></a>
+                <span id="quantity">{{cart.quantity}}</span>
+                <a class="plus-cart btn" pid={{cart.product.id}}><i class="fas fa-plus-square fa-lg"></i></a>
+              </div>
+              <div class="d-flex justify-content-between mb-2 pt-2">
+                <button class="btn btn-sm btn-danger remove-cart mr-3" pid={{cart.product.id}}>Remove item </button>
+                <p class="mb-0"><span><strong>${{cart.product.discounted_price}}</strong></span></p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          {% endfor %}
+          {% else %}
+          <div class="col-sm-12">
+            <h1>Add products to cart</h1>
+          </div>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h3>Total Amount</h3>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center border-1 p-2">
+              Amount<span> <span id="amount">$ {{amount}}</span></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-1 p-2">
+              Shipping Charge<span>$
+                {{shipping_amount}}</span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-2 p-2 mb-3">
+              <div>
+                <strong>Total</strong> <small>(including GST)</small>
+              </div>
+              <span><strong>$ <strong id="total_amount"> {{total_amount}}</strong></strong></span>
+            </li>
+          </ul>
+          {% if carts %}
+          <div class="d-grid"><a href="{% url 'checkout' %}" class="btn btn-primary">Place Order</a></div>
+          {% else %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-4">We accept</h5>
+          <img src="{% static 'app/images/payment.png' %}" alt="" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
