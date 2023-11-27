@@ -1,5 +1,5 @@
 # shoppifly
 
-''' bash
+``` bash
 python manage.py runserver
-'''
+```
