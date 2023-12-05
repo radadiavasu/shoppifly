@@ -15,11 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from app.views import CustomerRegistrationView, CustomerViewset
 
+router = routers.DefaultRouter()
+router.register('customer', CustomerViewset)
+# router.register(r'customer', CustomerRegistrationAPI, basename='customer')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app.urls'))
+    path('', include('app.urls')),
+    # path('api/registration/', CustomerRegistrationView.as_view(), name='customerregistration'),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 
 handler404 = 'app.views.page_not_found'

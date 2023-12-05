@@ -2,6 +2,12 @@ from django.db import models
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
+from rest_framework import viewsets
+
+from app.serializers import CustomerSerializer
+from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from app.serializers import CustomerSerializer
 from .models import Cart, Customer, OrderPlaced, Product, Contact, Rating
 from app.forms import ContactForm, CustomerRegistratiopnForm, LoginForm, ProfileForm, RatingForm
 from django.contrib import messages
@@ -457,6 +463,19 @@ def orders(request):
 def buy_now(request):
     return render(request, 'app/buynow.html')
 
+# class CustomerRegistrationAPI(APIView):
+#     def post(self, request):
+#         serializer = CustomerSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response({
+#                 "message": "User has been registered successfully!!!"
+#             })
+#         return Response(serializer.errors)
+
+class CustomerViewset(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
 
 class CustomerRegistrationView(View):
     def get(self, request):
@@ -477,6 +496,9 @@ class CustomerRegistrationView(View):
 
         fm = CustomerRegistratiopnForm(request.POST)
         if fm.is_valid():
+            serializer = CustomerSerializer(data=fm.cleaned_data)
+            if serializer.is_valid():
+                serializer.save()
             messages.success(
                 request, 'User has been registered successfully!!!')
             fm.save()
