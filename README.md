@@ -1,5 +1,6 @@
-# shoppifly
+# Run this command in your terminal
 
+***For Windows*** 
 ``` bash
 python manage.py runserver
 ```
