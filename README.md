@@ -1,6 +1,6 @@
 # Run this command in your terminal
 
-***For Windows & MacOS*** 
+***For `Windows` & `MacOS`*** 
 ``` bash
 python manage.py runserver
 ```
