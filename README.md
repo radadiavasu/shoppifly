@@ -4,7 +4,7 @@
 ``` bash
 python manage.py runserver
 ```
-***For Linux*** 
+***For `Linux`*** 
 ``` bash
 python3 manage.py runserver
 ```
