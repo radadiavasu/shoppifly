@@ -1,4 +1,4 @@
-# Run this command in your terminal
+# Run ⚡
 
 ***For `Windows` & `MacOS`*** 
 ``` bash
