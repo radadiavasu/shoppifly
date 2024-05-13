@@ -13,7 +13,7 @@ python3 manage.py runserver
 <div align=center>
 <img src="https://github.com/radadiavasu/shoppifly/blob/master/media/productimg/homepage.jpg">
 
-\n
 
 # Future Enhancement 🧠
+
 ***Build `Fashion Recommandation System` for `Top-Wear` and `Bottom-Wear`.***
