@@ -9,6 +9,6 @@ python manage.py runserver
 python3 manage.py runserver
 ```
 
-# Home Page
+# Home Page 🖼️
 <div align=center>
 <img src="https://github.com/radadiavasu/shoppifly/blob/master/media/productimg/homepage.jpg">
