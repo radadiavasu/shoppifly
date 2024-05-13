@@ -15,4 +15,4 @@ python3 manage.py runserver
 
 
 # Future Enhancement 🧠
-*** Build `Fashion Recommandation System` for `Top-Wear` and `Bottom-Wear`.
+***Build `Fashion Recommandation System` for `Top-Wear` and `Bottom-Wear`.***
