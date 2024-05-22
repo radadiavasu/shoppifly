@@ -63,7 +63,7 @@ urlpatterns = [
 
     path('registration/', views.CustomerRegistrationView.as_view(),
          name='customerregistration'),
-
+#    path('registration/api', views.CustomerRegistrationAPI.as_view(), name='customerregistration'),
     #     path('login/', views.LoginView.as_view(), name='login'),
 
     path('accounts/login/', auth_views.LoginView.as_view(template_name="app/login.html",
