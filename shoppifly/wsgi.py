@@ -15,5 +15,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shoppifly.settings')
 
 application = get_wsgi_application()
 
+# <<<<<<< main
 
+# # app = application
+# =======
 # app = application
+# >>>>>>> master

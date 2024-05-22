@@ -1,3 +1,4 @@
+//<<<<<<< main
 {
     "builds": [{
         "src": "shoppifly/wsgi.py",
@@ -11,3 +12,18 @@
         }
     ]
 }
+=======
+{
+    "builds": [{
+        "src": "shoppifly/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.10" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "shoppifly/wsgi.py"
+        }
+    ]
+}
+>>>>>>> master
